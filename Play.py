@@ -41,16 +41,6 @@ class Play:
                     position_y = int(input('Incorrect position number. Give column position of your choice from [0,{}]\n'.format(self.board.size)))
                 except ValueError:
                     position_y=0
-       #     while not self.board.is_empty(position_x, position_y):
-      #          position_x = int(input('This position is not empty. Give another one. Give row position of your choice\n'))
-     #           while position_x<1 or position_x>self.board.size:
-    #                position_x = int(input('Incorrect position number. Give x position of your choice from [0,{}]\n'.format(self.board.size)))
-   #                 position_y = int(input('Give column position of your choice\n'))
-  #              while position_y<1 or position_y>self.board.size:
- #                   position_y = int(input('Incorrect position number. Give column position of your choice from [0,{}]\n'.format(self.board.size)))
- #           sign="O"
- #           if self.player1.sign== -1:
-#                sign="X"
             if self.board.set_position(position_x, position_y, self.player1.sign):
                 self.board.write_board()
                 print("Well done. It's computer turn now!")

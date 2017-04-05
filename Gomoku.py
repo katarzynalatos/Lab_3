@@ -23,6 +23,8 @@ class Gomoku:
             elif correct_step==True and player_nr==self.player1.nr:
                 player_nr=self.player0.nr
             correct_step=game.play(player_nr)
+           # self.board.is_winner();
+
 
 
 

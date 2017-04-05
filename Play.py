@@ -41,6 +41,7 @@ class Play:
                     position_y = int(input('Incorrect position number. Give column position of your choice from [0,{}]\n'.format(self.board.size)))
                 except ValueError:
                     position_y=0
+
             if self.board.set_position(position_x, position_y, self.player1.sign):
                 self.board.write_board()
                 print("Well done. It's computer turn now!")

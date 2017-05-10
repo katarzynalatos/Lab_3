@@ -24,7 +24,7 @@ class Board:
         else:
             return False
 
-    def check_field(self,x,y):
+    def check_field_horizontal(self,x,y):
         if self.size <= 5:
             winning_fields=self.size
         else:
@@ -38,6 +38,11 @@ class Board:
         elif sum==-winning_fields:
             return -1
 
+    def check_field_vertical(self, x, y):
+        if self.size <= 5:
+            winning_fields = self.size
+        else:
+            winning_fields = 5
         """Vertical addition"""
         sum = 0
         for field in range(0, winning_fields):
@@ -47,6 +52,11 @@ class Board:
         elif sum == -winning_fields:
             return -1
 
+    def check_field_cross_right(self, x, y):
+        if self.size <= 5:
+            winning_fields = self.size
+        else:
+            winning_fields = 5
         """Cross right addition"""
         sum = 0
         for field in range(0, winning_fields):
@@ -56,15 +66,17 @@ class Board:
         elif sum == -winning_fields:
             return -1
 
+    def check_field_cross_left(self, x, y):
+        if self.size <= 5:
+            winning_fields = self.size
+        else:
+            winning_fields = 5
         """Cross left addition"""
         sum = 0
         for field in range(0, winning_fields):
-            sum += self.board[x - field][y+field]
-            if x-field<0 or y+field<0:
+            sum += self.board[x + field][y-field]
+            if y < winning_fields-1:
                 raise IndexError
-            print(str(x-field)+" i"+str(y+field))
-        print(str(self.board))
-        print(sum)
         if sum == winning_fields:
             return 1
         elif sum == -winning_fields:
@@ -75,26 +87,29 @@ class Board:
         end_of_game=0
         for x in range(0,self.size):
             for y in range(0,self.size):
-                try:
-                    end_of_game=self.check_field(x, y)
-                except:
-                    end_of_game = 0
-                if end_of_game==1 and player0.sign==1:
-                    self.write_board()
-                    print('Game over.Computer won.Try again\n')
-                    exit()
-                elif end_of_game==1 and player0.sign!=1:
-                    self.write_board()
-                    print('Game over.You won!\n')
-                    exit()
-                elif end_of_game==-1 and player0.sign!=1:
-                    self.write_board()
-                    print('Game over.Computer won.Try again\n')
-                    exit()
-                elif end_of_game==-1 and player0.sign==1:
-                    self.write_board()
-                    print('Game over.You won!\n')
-                    exit()
+                for function in (self.check_field_horizontal, self.check_field_vertical, self.check_field_cross_right, self.check_field_cross_left):
+                    try:
+                        end_of_game=function(x, y)
+                    except IndexError:
+                        end_of_game=0
+                    if end_of_game==0:
+                        continue
+                    elif end_of_game==1 and player0.sign==1:
+                        self.write_board()
+                        print('Game over.Computer won.Try again\n')
+                        exit()
+                    elif end_of_game==1 and player0.sign!=1:
+                        self.write_board()
+                        print('Game over.You won!\n')
+                        exit()
+                    elif end_of_game==-1 and player0.sign!=1:
+                        self.write_board()
+                        print('Game over.Computer won.Try again\n')
+                        exit()
+                    elif end_of_game==-1 and player0.sign==1:
+                        self.write_board()
+                        print('Game over.You won!\n')
+                        exit()
 
     def write_board(self):
         string="   "

@@ -1,4 +1,5 @@
 
+
 class Player:
     def __init__(self, name="Computer", sign=0, nr=0):
         #player nr =1

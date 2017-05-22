@@ -93,7 +93,6 @@ class Board:
         end_of_game=0
         for x in range(0,self.size):
             for y in range(0,self.size):
-                logging.info("Position [" + str(x) + "," + str(y) + "] was checked.")
                 for function in (self.check_field_horizontal, self.check_field_vertical, self.check_field_cross_right, self.check_field_cross_left):
                     try:
                         end_of_game=function(x, y)
@@ -142,8 +141,8 @@ class Board:
                 else:
                     string+="_"
                 string+='|'
-            logging.info("Board was printed")
             print(string)
+        logging.info("Board was printed")
  
 
 

@@ -24,7 +24,7 @@ class Gomoku:
                 player_nr=self.player1.nr
             elif correct_step==True and player_nr==self.player1.nr:
                 player_nr=self.player0.nr
-            logging.info("Player no: " + str(player_nr) + "played.")
+            logging.info("Player no: " + str(player_nr) + " played.")
             correct_step=game.play(player_nr)
 
 

@@ -1,8 +1,11 @@
+import logging
+
 
 class Board:
     def __init__(self, size=0):
         self.size = size
         self.board = []
+        logging.info("Board was made.")
         for i in range(0,self.size):
             self.board.append([])
             for j in range(0, self.size):
@@ -11,17 +14,20 @@ class Board:
 
     def is_empty(self, x, y):
         if self.board[x-1][y-1]==0:
+            logging.info("An empty position was chosen.")
             return True
         else:
+            logging.info("Not an empty position was chosen.")
             return False
 
     def set_position(self, x, y, sign,player0):
         if self.board[x-1][y-1]==0:
             self.board[x-1][y-1]=sign
             self.is_winner(player0)
-
+            logging.info("Position was set successfully")
             return True
         else:
+            logging.info("Position wasn't set successfully")
             return False
 
     def check_field_horizontal(self,x,y):
@@ -87,6 +93,7 @@ class Board:
         end_of_game=0
         for x in range(0,self.size):
             for y in range(0,self.size):
+                logging.info("Position [" + str(x) + "," + str(y) + "] was checked.")
                 for function in (self.check_field_horizontal, self.check_field_vertical, self.check_field_cross_right, self.check_field_cross_left):
                     try:
                         end_of_game=function(x, y)
@@ -97,18 +104,22 @@ class Board:
                     elif end_of_game==1 and player0.sign==1:
                         self.write_board()
                         print('Game over.Computer won.Try again\n')
+                        logging.info("Computer won.")
                         exit()
                     elif end_of_game==1 and player0.sign!=1:
                         self.write_board()
                         print('Game over.You won!\n')
+                        logging.info("Player won.")
                         exit()
                     elif end_of_game==-1 and player0.sign!=1:
                         self.write_board()
                         print('Game over.Computer won.Try again\n')
+                        logging.info("Computer won.")
                         exit()
                     elif end_of_game==-1 and player0.sign==1:
                         self.write_board()
                         print('Game over.You won!\n')
+                        logging.info("Player won.")
                         exit()
 
     def write_board(self):
@@ -131,6 +142,7 @@ class Board:
                 else:
                     string+="_"
                 string+='|'
+            logging.info("Board was printed")
             print(string)
  
 
